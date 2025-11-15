@@ -48,6 +48,7 @@
       color: white;
       font-weight: bold;
     }
+
     #yesBtn:hover {
       transform: scale(1.1);
     }
@@ -90,7 +91,8 @@
   </style>
 </head>
 <body>
-  <h1>Aku punya satu pertanyaan penting... 💖<br>
+  <h1>
+    Aku punya satu pertanyaan penting... 💖<br>
     Mau nggak jadi Istri aku bubulll? 🥰
   </h1>
 
@@ -106,7 +108,7 @@
     const yesBtn = document.getElementById("yesBtn");
     const heartsContainer = document.getElementById("hearts");
 
-    // Fungsi bikin hati jatuh
+    // Falling hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -115,14 +117,11 @@
       heart.style.fontSize = Math.random() * 20 + 15 + "px";
       heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
       heartsContainer.appendChild(heart);
-
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      setTimeout(() => heart.remove(), 5000);
     }
     setInterval(createHeart, 300);
 
-    // Kalau klik "Iya"
+    // If Yes
     yesBtn.addEventListener("click", () => {
       document.body.innerHTML = `
         <h1 style="color:white; text-shadow:0 3px 10px rgba(0,0,0,0.4)">
@@ -131,7 +130,7 @@
       `;
     });
 
-    // Kalau klik "Nggak", tombol geser
+    // "No" button moves
     noBtn.addEventListener("mouseenter", () => {
       const x = Math.random() * 200 - 100;
       const y = Math.random() * 200 - 100;
