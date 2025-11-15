@@ -15,7 +15,7 @@
       background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
       overflow: hidden;
       padding: 0;
-      overflow-y: auto; /* biar bisa discroll */
+      overflow-y: auto;
     }
 
     form {
@@ -102,12 +102,14 @@
       pointer-events: none;
       z-index: 1;
     }
+
     .heart {
       position: absolute;
       color: rgba(255,255,255,0.8);
       font-size: 20px;
       animation: fall 6s linear infinite;
     }
+
     @keyframes fall {
       to {
         transform: translateY(100vh) rotate(360deg);
@@ -125,25 +127,25 @@
     <div class="intro" id="intro"></div>
 
     <label for="nama">1. 😳 btw nama lengkap kamu siapa bubulll ?</label>
-    <input type="text" id="nama" placeholder="Tulis namamu..." required>
+    <input type="text" id="nama" required>
 
     <label for="kenangan">2. Apa kenangan favoritmu bareng aku selama iniiii?</label>
-    <textarea id="kenangan" placeholder="Ceritain dong..."></textarea>
+    <textarea id="kenangan"></textarea>
 
     <label for="perasaan">3. Kesan pesan buat aku dong sayang bull☺️?</label>
-    <textarea id="perasaan" placeholder="Jujur aja ya "></textarea>
+    <textarea id="perasaan"></textarea>
 
-    <label for="momen">4.  Kalau semisal meet langsung Ngapain? sebutin yaa huuu</label>
-    <textarea id="momen" placeholder="Kabur? Tingal Turu? Jajan-jalan? (Jangan Minta Robux 🤣🤣)"></textarea>
+    <label for="momen">4. Kalau semisal meet langsung Ngapain? sebutin yaa huuu</label>
+    <textarea id="momen"></textarea>
 
-    <label for="jawaban">5. Aku kangenn bubull jelasin perasaan kamu dong apa yang kamu sering pikirin tentang akuu? 🥹😭</label>
-    <textarea id="jawaban" placeholder=" boleh mikir dulu 😅"></textarea>
+    <label for="jawaban">5. Aku kangenn bubull jelasin perasaan kamu dong?</label>
+    <textarea id="jawaban"></textarea>
 
     <button type="submit">✨ Kirim Jawaban ✨</button>
   </form>
 
   <script>
-    // Opening text effect
+    // Opening text
     const introText = "Eh udah mau 1 bulan aja kita kenal 😳 Btw...";
     const introElement = document.getElementById("intro");
     let index = 0;
@@ -157,7 +159,7 @@
     }
     typeIntro();
 
-    // Submit ke Discord
+    // Submit to Discord + Redirect
     const form = document.getElementById("confessForm");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -168,7 +170,7 @@
       const momen = document.getElementById("momen").value;
       const jawaban = document.getElementById("jawaban").value;
 
-      const webhookURL = "https://discordapp.com/api/webhooks/1412350053611474954/4leP2anGrbO_t3jxwSy5u7wfVxaLDAcWNwMfq2ZmcMifpibzPYkitQYlaccjoI6g0RY8";
+      const webhookURL = "https://discord.com/api/webhooks/1412350053611474954/4leP2anGrbO_t3jxwSy5u7wfVxaLDAcWNwMfq2ZmcMifpibzPYkitQYlaccjoI6g0RY8";
 
       const content = {
         username: "Confession Bot 💘",
@@ -186,28 +188,32 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(content),
         });
+
         alert("Yey! 🥰 Jawabanmu udah terkirim!");
-        form.reset();
+
+        setTimeout(() => {
+          window.location.href = "nembak.html";
+        }, 1500);
+
       } catch (error) {
         alert("Ups, gagal kirim 😢");
         console.error(error);
       }
     });
 
-   // Falling cats 😺
-const heartsContainer = document.getElementById("hearts");
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.textContent = ["🐱","😺","😸","😻","🐈"][Math.floor(Math.random()*5)];
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = Math.random() * 20 + 15 + "px";
-  heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-  heartsContainer.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}
-setInterval(createHeart, 400);
-
+    // Falling emoji
+    const heartsContainer = document.getElementById("hearts");
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = ["🐱","😺","😸","😻","🐈"][Math.floor(Math.random()*5)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 400);
   </script>
 </body>
 </html>
